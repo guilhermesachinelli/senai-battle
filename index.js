@@ -107,6 +107,20 @@ app.get('/tipoDoCampo' , async (req, res) => {
         res.status(500).send('Erro ao buscar os tipos de campo');
     }
 });
+app.get('/tipoDoCampo/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('SELECT * FROM tipodocampo WHERE id = $1', [id]);
+        if (result.rowCount === 0) {
+            res.status(404).send({ mensagem: 'Tipo de campo não encontrado' });
+        } else {
+            res.json(result.rows[0]);
+        }
+    } catch (error) {
+        console.error('Erro ao obter tipo de campo por ID:', error);
+        res.status(500).send('Erro ao obter tipo de campo por ID');
+    }
+});
 app.get('/', (req, res) => {
     res.send('Servidor rodando!');
 });
