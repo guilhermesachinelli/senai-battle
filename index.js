@@ -82,6 +82,31 @@ app.delete('/lutadoressenai/:id', async (req, res) => {
         res.status(500).send({ message: 'Erro ao deletar usuário' });
     }
 });
+app.get('/lutadoressenai/classe/:classe', async (req, res) => {
+    try {
+        const { classe } = req.params;
+        const result = await pool.query('SELECT * FROM lutadoressenai WHERE classe = $1', [classe]);
+        res.json({
+            total: result.rowCount,
+            lutadores: result.rows
+        });
+    } catch (error) {
+        console.error('Erro ao buscar os lutadores por classe. [Programador, Mecanico, Eletricista, Administrador, Excelers]', error);
+        res.status(500).send('Erro ao buscar os lutadores por classe');
+    }
+});
+app.get('/tipoDoCampo' , async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM tipodocampo');
+        res.json({
+            total: result.rowCount,
+            tipodocampo: result.rows
+        });
+    } catch (error) {
+        console.error('Erro ao buscar os tipos de campo');
+        res.status(500).send('Erro ao buscar os tipos de campo');
+    }
+});
 app.get('/', (req, res) => {
     res.send('Servidor rodando!');
 });
