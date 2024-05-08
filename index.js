@@ -76,7 +76,7 @@ app.delete('/lutadoressenai/:id', async (req, res) => {
     try {
         const { id } = req.params;
         await pool.query('DELETE FROM lutadoressenai WHERE id = $1', [id]);
-        res.status(200).send({ message: 'Usuário removido com sucesso' });
+        res.status(200).send({ message: 'Lutador removido com sucesso' });
     } catch (error) {
         console.error('Erro ao deletar usuário');
         res.status(500).send({ message: 'Erro ao deletar usuário' });
@@ -156,10 +156,6 @@ app.get('/campoDeBatalha/:id1/:id2/:idCampo' , async (req, res) => {
     try {
         const { id1, id2, idCampo } = req.params;
         const vencedor = await batalha(id1, id2, idCampo);
-        console.log( id1);
-        console.log( id2);
-        console.log( idCampo);
-        console.log( vencedor);
         await pool.query('INSERT INTO campoDeBatalha (lutador1, lutador2,vencedor, campoID) VALUES ($1, $2, $3, $4)', [id1, id2, vencedor, idCampo]);
         const { rows } = await pool.query('SELECT * FROM lutadoressenai WHERE id = $1', [vencedor] );
         res.json({vencedor: rows[0], mensagem: 'Batalha registrada com sucesso'});
