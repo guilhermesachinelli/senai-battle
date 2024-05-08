@@ -15,7 +15,7 @@ Como Usar
 
 Clone o repositório para o seu ambiente local.
 Instale as dependências do projeto usando npm install.
-Configure o banco de dados PostgreSQL com o nome heroes_db e execute o script script.sql para criar as tabelas necessárias.
+Configure o banco de dados PostgreSQL com o nome senaibattle e execute o script script.sql para criar as tabelas necessárias.
 Abra o arquivo index.js e ajuste as configurações do banco de dados conforme necessário (usuário, senha, host, porta).
 Inicie o servidor executando npm run dev.
 Acesse as diferentes rotas disponíveis conforme a documentação fornecida.
